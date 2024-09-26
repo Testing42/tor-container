@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  tor-browser:
+    image: domistyle/tor-browser
+    container_name: tor-browser
+    environment:
+      - VNC_PASSWD=your_secure_password  # Change this to a secure password
+      - TZ=UTC
+    ports:
+      - "5800:5800"  # Web UI
+      - "5900:5900"  # VNC port
+    volumes:
+      - tor-browser-data:/home/tor
+    restart: unless-stopped
+
+volumes:
+  tor-browser-data:
