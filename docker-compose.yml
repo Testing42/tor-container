@@ -5,14 +5,20 @@ services:
     image: domistyle/tor-browser
     container_name: tor-browser
     environment:
-      - VNC_PASSWD=your_secure_password  # Change this to a secure password
+      - VNC_PASSWORD=Change_this_password  # Note: VNC_PASSWORD
       - TZ=UTC
+    networks:
+      - npm_network
     ports:
-      - "5800:5800"  # Web UI
-      - "5900:5900"  # VNC port
+      - "127.0.0.1:5800:5800"  # Web UI, only accessible from localhost
+      - "127.0.0.1:5900:5900"  # VNC port, only accessible from localhost
     volumes:
       - tor-browser-data:/home/tor
     restart: unless-stopped
+    
+networks:
+  npm_network:
+    external: true
 
 volumes:
   tor-browser-data:
